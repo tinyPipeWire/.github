@@ -1,0 +1,40 @@
+name: Feature request
+description: Something the API cannot express today.
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        These libraries deliberately expose less than PipeWire does. A
+        proposal is easier to weigh when it says what you are trying to
+        build, not only which function you want.
+  - type: dropdown
+    id: project
+    attributes:
+      label: Which project
+      options:
+        - tinypipewire (the C library)
+        - tinypipewire-rs (the Rust bindings)
+        - Both
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do
+      description: The application you are writing, and where the API stops you.
+    validations:
+      required: true
+  - type: textarea
+    id: workaround
+    attributes:
+      label: What you do instead today
+      description: >
+        Whether dropping to PipeWire directly works, and what it costs you.
+        This is often the strongest argument for adding something.
+  - type: textarea
+    id: shape
+    attributes:
+      label: What the API might look like
+      description: A sketch of the call you would want. Rough is fine.
+      render: c

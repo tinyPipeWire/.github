@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: PipeWire itself
+    url: https://gitlab.freedesktop.org/pipewire/pipewire/-/issues
+    about: For bugs in PipeWire rather than in these wrappers.
+  - name: Security vulnerability
+    url: https://github.com/tinyPipeWire/tinypipewire/security/advisories/new
+    about: Report privately so a fix can go out before the details do.

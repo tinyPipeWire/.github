@@ -1,0 +1,68 @@
+name: Bug report
+description: Something behaves differently from what the documentation says.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Found a security problem? Don't file it here — use **Report a
+        vulnerability** on the Security tab instead, so a fix can go out
+        before the details do.
+  - type: dropdown
+    id: project
+    attributes:
+      label: Which project
+      options:
+        - tinypipewire (the C library)
+        - tinypipewire-rs (the Rust bindings)
+        - Not sure
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you expected, and what you got instead.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: How to reproduce
+      description: >
+        The smallest program that shows it, ideally one that starts from an
+        example. Say which target it runs against, since behaviour differs
+        between a real device and a null sink.
+      render: c
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: >
+        A release tag or a commit. For the Rust crates, give the crate
+        version and what `tinypipewire::C_API_VERSION` reports.
+      placeholder: "v0.9.1, or 8daf2d1"
+    validations:
+      required: true
+  - type: input
+    id: pipewire
+    attributes:
+      label: PipeWire version
+      description: Output of `pipewire --version`.
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Distribution and kernel
+      placeholder: "Ubuntu 24.04, 6.8.0-generic"
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: >
+        Anything the library logged, and `wpctl status` if the problem
+        involves how a stream got wired up.
+      render: shell
