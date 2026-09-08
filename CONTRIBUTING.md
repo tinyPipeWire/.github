@@ -36,8 +36,10 @@ cargo build --features vendored
 cargo test --workspace --features vendored
 ```
 
-Changing the C headers changes the generated bindings, and the committed copy
-has to follow or CI fails:
+The committed bindings have to match what bindgen produces today, or the
+`bindings` job fails. Two things move them: a change to the C headers, and a
+change to the bindgen version itself, since a new release can generate
+different code from identical headers. Regenerate either way:
 
 ```sh
 TINYPIPEWIRE_SYS_UPDATE_BINDINGS=1 cargo build -p tinypipewire-sys
@@ -45,6 +47,11 @@ TINYPIPEWIRE_SYS_UPDATE_BINDINGS=1 cargo build -p tinypipewire-sys
 
 On a machine with no PipeWire, add `TINYPIPEWIRE_SYS_HEADERS_ONLY=1` to read
 the submodule's headers and skip linking.
+
+Dependabot raises the bindgen requirement but never regenerates, so its pull
+request needs that command run on its branch before it can merge. bindgen
+0.73 dropped `Copy` and `Clone` from the opaque handle types, which is the
+shape this takes: mechanical, and worth reading before accepting.
 
 ## Sending a change
 
