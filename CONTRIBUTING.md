@@ -102,13 +102,30 @@ to the Rust interface and a change to the C API are different events.
 **Moving the pinned C release bumps the crate version too.** Build metadata
 is ignored when versions are compared, so `0.1.0+tpw0.9.1` and
 `0.1.0+tpw0.10.0` are the same version to Cargo and to crates.io, and the
-second could never be published. Raise the patch alongside the pin, the way
-`libgit2-sys` goes `0.18.7+1.9.6` then `0.18.8+1.9.7`. The metadata records
-which C release a crate carries; it never distinguishes two releases on its
-own.
+second could never be published. Raise the patch alongside the pin. The
+metadata records which C release a crate carries; it never distinguishes two
+releases on its own.
 
 Changing the pin also means regenerating the committed bindings, since the
 `bindings` job compares them against the pinned headers.
+
+### Tags
+
+A release is tagged on the commit it was cut from. The C library and the
+crate a reader is most likely to depend on take a bare version; the
+supporting crate carries its name, so the two are told apart at a glance.
+
+| What | Tag |
+| --- | --- |
+| tinypipewire (the C library) | `v0.9.1` |
+| tinypipewire (the crate) | `v0.1.0` |
+| tinypipewire-sys | `tinypipewire-sys-v0.1.0+tpw0.9.1` |
+
+The `-sys` tag keeps its build metadata, so the C release a crate shipped is
+readable from the tag list without opening anything.
+
+Tags go on at publication rather than ahead of it. A tag names the commit a
+release was cut from, and there is nothing to name until one exists.
 
 ## License
 
